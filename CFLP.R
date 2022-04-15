@@ -50,10 +50,10 @@ model <- MIPModel() %>%
   #Demand of customers shouldn't exceed total facility capacities
   add_constraint(sum_expr(demand[i] * x[i, j], i = 1:n) <= capacity[j] * y[j], j = 1:m) %>%
   
-  # every customer needs to be assigned to a SC
+  # every customer needs to be assigned to a facility
   add_constraint(sum_expr(x[i, j], j = 1:m) == 1, i = 1:n) %>% 
   
-  # if a customer is assigned to a SC, then this SC must be built
+  # if a customer is assigned to a SC, then this facility must be built
   add_constraint(x[i,j] <= y[j], i = 1:n, j = 1:m)
 model
 
